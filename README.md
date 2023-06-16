@@ -1,13 +1,24 @@
 # de-7-sprint-tests-platform
 Здесь собраны все тесты, авторские решения и прекоды заданий, адаптированных к платформе практикума `python serverless` по 7 спринту курса Дата Инженер.
-Тесты написаны с помощью тестовой библиотеки `ast_testlib`. Образ библиотеки доступен по ссылке: https://github.com/Yandex-Practicum/data-testlibs/tree/master/ast_testlib
+Тесты написаны с помощью тестовой библиотеки `ast_testlib`. 
+
+---
+
+Актуальный образ тестовой библиотеки доступен по ссылке: https://github.com/Yandex-Practicum/data-testlibs/tree/master/ast_testlib
+Документация к методам тестовой библиотеки доступна по ссылке: https://docs.dd.praktikum-services.ru/ 
+
+user: `DXq9xGeywy7u3hy5`
+password: `TbeG8DMAbhkwzc4a`
+
+Расшифровка ошибок возвращаемых тестовой библиотекой собрана по ссылке:
+https://github.com/Yandex-Practicum/data-testlibs/blob/master/ast_testlib/TankerErrorsRU.md
 
 ---
 
 В конечных папках лежат 4 файла:
 * `user.py` - прекод, который будет виден студенту. Здесь можно вводить свое альтернативное решение и проверять работу теста
 * `author.py` - эталонное решение
-* `test.py` - тест. Документация к методам тестовой библиотеки доступна по ссылке: https://docs.dd.praktikum-services.ru/ (user: DXq9xGeywy7u3hy5, password: TbeG8DMAbhkwzc4a)
+* `test.py` - тест
 * `README.md` - содержит ссылку на формулировку задачи и комментарии от тестописателя
 
 ---
@@ -26,9 +37,12 @@ python __main__.py \
 
 Значения флагов:
 * `-u`, `-a`, `-t`- пути к файлам решений студента, автора и теста
-
-* `--no-slack` - отключение функции трансляции ошибок в Mattermost в канал `#****debug_ast_testlib****`
-
+* `--no-slack` - отключение функции трансляции ошибок в Mattermost в канал `#debug_ast_testlib`
 * `--log-data` - вывод лога по методам, указанным в `_test.call()` внутри тестов, вывод результата проверки и `output` студента
-
 * `--keep` - не удалять код автора и код теста после проверки
+
+---
+
+# О доработках
+Все предложения по доработкам собраны на странице в ноушине: https://www.notion.so/praktikum/DE-7-c7ed486ad22741eca3dc4094742a799a?pvs=4
+Все комментарии по контенту собраны в копии контента спринта в ноушине: https://www.notion.so/praktikum/7-Data-Lake-252eb52bfb274fa68f7ecfc70c13c060
