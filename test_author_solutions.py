@@ -46,6 +46,7 @@ class RegressionTest(unittest.TestCase):
                 # )
                 
                 # TODO: Удалить сгенерированное решение студента из папки
+                # TODO: Обнулить файловую систему в докере
 
 if __name__ == "__main__":
     # TODO: Скачать тестлибу
