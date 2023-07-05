@@ -3,7 +3,11 @@ import subprocess
 import json
 from zipfile import ZipFile
 
-EXCEPT_FILES = ['test_author_solutions.py', 'work_with_testlib.py']
+EXCEPT_FILES = [
+    'test_author_solutions.py', 
+    'work_with_testlib.py',
+    'generate_solution.py',
+    ]
 
 
 def get_testlib():
@@ -26,11 +30,9 @@ def get_testlib_answer(user_py, author_py, test_py, folder, timeout=60):
         output = f'TimeoutExpired in task {folder}'
         
     try:
-        out = json.loads(output)
+        return json.loads(output)
     except Exception:
         assert False, output
-
-    return json.loads(output)
 
 
 def delete_testlib():
