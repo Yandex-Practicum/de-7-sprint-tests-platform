@@ -1,26 +1,17 @@
 import unittest
 import os
-import json
-import subprocess
+
+from work_with_testlib import (get_testlib,
+                               get_testlib_answer,
+                               delete_testlib)
+
 
 TIMEOUT_PLATFORM = 20
 
-def get_out(cmd, folder):
-    try:
-        result = subprocess.run(cmd, stdout=subprocess.PIPE, timeout=TIMEOUT_PLATFORM)
-        output = result.stdout.decode("utf-8")
-    except subprocess.TimeoutExpired:
-        output = f'TimeoutExpired in task {folder}'
-        
-    try:
-        out = json.loads(output)
-    except Exception:
-        assert False, output
 
-    return json.loads(output)
-
-class RegressionTest(unittest.TestCase):
+class RegressionTest(unittest.TestCase):   
     def test_run(self):
+        get_testlib()
         for folder in os.listdir(path='.'):
             if folder[:2] != 'de':
                 continue
@@ -31,26 +22,20 @@ class RegressionTest(unittest.TestCase):
                 # TODO: Переделать вывод, добавить вердикт сразу
                 print(f"[{folder}]",end=' ', flush=True)
 
-                # out = get_out(
-                #     [
-                #         "python",
-                #         main_py,
-                #         "-u",
-                #         f"{fname}{user_py}",
-                #         "-a",
-                #         f"{fname}{author_py}",
-                #         "-t",
-                #         f"{fname}test.py",
-                #         "--keep"
-                #     ]
+                # out = get_testlib_answer(
+                #     'solution.py',
+                #     'author.py',
+                #     'test.py'
+                #     folder,
+                #     TIMEOUT_PLATFORM,
                 # )
                 
                 # TODO: Удалить сгенерированное решение студента из папки
                 # TODO: Обнулить файловую систему в докере
+                
+        delete_testlib()
+
 
 if __name__ == "__main__":
-    # TODO: Скачать тестлибу
-    
-    unittest.main()
-    
-    # TODO: Удалить тестлибу
+    # unittest.main()
+    print(os.lstat('work_with_testlib.py'))

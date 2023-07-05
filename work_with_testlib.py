@@ -1,0 +1,40 @@
+import os
+import subprocess
+import json
+from zipfile import ZipFile
+
+EXCEPT_FILES = ['test_author_solutions.py', 'work_with_testlib.py']
+
+
+def get_testlib():
+    zf = ZipFile('/testlibs/ast_testlib_stable.py', 'r')
+    zf.extractall('.')
+
+
+def get_testlib_answer(user_py, author_py, test_py, folder, timeout=60):
+    cmd = [
+        'python3', '__main__.py',
+        '-u', f'{folder}/{user_py}',
+        '-a', f'{folder}/{author_py}',
+        '-t', f'{folder}/{test_py}',
+        '--keep', '--no-slack',
+        ]
+    try:
+        result = subprocess.run(cmd, stdout=subprocess.PIPE, timeout=timeout)
+        output = result.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired:
+        output = f'TimeoutExpired in task {folder}'
+        
+    try:
+        out = json.loads(output)
+    except Exception:
+        assert False, output
+
+    return json.loads(output)
+
+
+def delete_testlib():
+    files = next(os.walk('.'))[2]
+    for f in files:
+        if f[-3:] == '.py' and f not in EXCEPT_FILES:
+            os.remove(f'./{f}')
