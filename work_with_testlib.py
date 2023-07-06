@@ -9,7 +9,6 @@ EXCEPT_FILES = [
     'generate_solution.py',
     ]
 
-
 def get_testlib():
     zf = ZipFile('/testlibs/ast_testlib_stable.py', 'r')
     zf.extractall('.')
