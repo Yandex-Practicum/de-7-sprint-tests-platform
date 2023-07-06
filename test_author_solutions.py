@@ -8,40 +8,34 @@ from generate_solution import generate_solution_code
 
 TIMEOUT_PLATFORM = 20
 
+def call_testlib(folder, get_log=False):
+    generate_solution_code(folder)
+    
+    # TODO: Переделать вывод, добавить вердикт сразу
 
-class RegressionTest(unittest.TestCase):
-    def testlib_run(self):
-        try:
-            folder = self.folder
-        except:
-            return
-        
-        with self.subTest(folder=folder):
-            generate_solution_code(folder)
-            
-            # TODO: Переделать вывод, добавить вердикт сразу
+    answer = get_testlib_answer(
+        'solution.py',
+        'author.py',
+        'test.py',
+        folder,
+        TIMEOUT_PLATFORM,
+        get_log
+    )
+    
+    os.remove(f'{folder}/solution.py')
+    # TODO: Обнулить файловую систему в докере
+    assert answer['solved'], f'Not solve {folder}'
+    print(f"[{folder}]", answer['solved'])
 
-            answer = get_testlib_answer(
-                'solution.py',
-                'author.py',
-                'test.py',
-                folder,
-                TIMEOUT_PLATFORM,
-            )
-            
-            os.remove(f'{folder}/solution.py')
-            # TODO: Обнулить файловую систему в докере
-            assert answer['solved'], f'Not solve {folder}'
-            print(f"[{folder}]", answer['solved'])
 
-            
+class RegressionTest(unittest.TestCase):           
     def test_run(self):
         get_testlib()
         for folder in os.listdir(path='.'):
             if folder[:2] != 'de':
                 continue
-            self.folder = folder
-            self.testlib_run()
+            with self.subTest(folder=folder):
+                call_testlib(folder)
 
         delete_testlib()
 

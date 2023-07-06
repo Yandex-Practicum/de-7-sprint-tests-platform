@@ -15,7 +15,7 @@ def get_testlib():
     zf.extractall('.')
 
 
-def get_testlib_answer(user_py, author_py, test_py, folder, timeout=60):
+def get_testlib_answer(user_py, author_py, test_py, folder, timeout=60, get_log=False):
     cmd = [
         'python3', '__main__.py',
         '-u', f'{folder}/{user_py}',
@@ -23,6 +23,8 @@ def get_testlib_answer(user_py, author_py, test_py, folder, timeout=60):
         '-t', f'{folder}/{test_py}',
         '--keep', '--no-slack',
         ]
+    if get_log:
+        cmd.append('--log-data')
     try:
         result = subprocess.run(cmd, stdout=subprocess.PIPE, timeout=timeout)
         output = result.stdout.decode('utf-8')

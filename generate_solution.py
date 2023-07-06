@@ -22,9 +22,22 @@ def remove_comments(author_code):
 def generate_solution_code(folder):    
     with open(f'{folder}/author.py', "r+", encoding='utf-8') as f:
         author_code = f.read()
-        
+    author_code = author_code.replace('AUTHOR', 'USERNAME')
     solution_code = remove_comments(author_code)
-    
     with open(f'{folder}/solution.py','w') as f:
         f.write(solution_code)
-   
+
+# folder = 'de07040402'
+# generate_solution_code(folder)
+
+# from work_with_testlib import (get_testlib,
+#                                get_testlib_answer,
+#                                delete_testlib)
+# get_testlib()
+# answer = get_testlib_answer(
+#     'solution.py',
+#     'author.py',
+#     'test.py',
+#     folder,
+#     get_log=True
+#     )
