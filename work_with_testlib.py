@@ -7,6 +7,7 @@ EXCEPT_FILES = [
     'test_author_solutions.py', 
     'work_with_testlib.py',
     'generate_solution.py',
+    'update_filesystem.py',
     ]
 
 def get_testlib():
