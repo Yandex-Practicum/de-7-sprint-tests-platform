@@ -34,7 +34,7 @@ def get_testlib_answer(user_py, author_py, test_py, folder, timeout=60, get_log=
     try:
         return json.loads(output)
     except Exception:
-        assert False, output
+        return output
 
 
 def delete_testlib():

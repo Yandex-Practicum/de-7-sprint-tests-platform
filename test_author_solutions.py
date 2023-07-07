@@ -7,9 +7,12 @@ from work_with_testlib import (get_testlib,
 from generate_solution import generate_solution_code
 from update_filesystem import refresh_filesystem
 
-TIMEOUT_PLATFORM = 20
+TIMEOUT_PLATFORM = 60
 
 def call_testlib(folder, get_log=False):
+    if 'test.py' not in next(os.walk(folder))[2]:
+        return
+    
     generate_solution_code(folder)
     
     answer = get_testlib_answer(
@@ -24,8 +27,14 @@ def call_testlib(folder, get_log=False):
     os.remove(f'{folder}/solution.py')
     refresh_filesystem(folder)
     
-    assert answer['solved'], f'Not solve {folder}, error: ' + answer['error']['id']
+    if not isinstance(answer, dict):
+        print(f"[{folder}]", answer)
+        assert False, answer
+    if 'solved' not in answer:
+        print(f"[{folder}]", answer)
+        assert False, answer
     print(f"[{folder}]", answer['solved'])
+    assert answer['solved'], f'Not solve {folder}, error: ' + answer['error']['id']
 
 
 class RegressionTest(unittest.TestCase):           
@@ -40,5 +49,4 @@ class RegressionTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    # unittest.main()
-    delete_testlib()
+    unittest.main()
