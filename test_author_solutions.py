@@ -50,7 +50,7 @@ class RegressionTest(unittest.TestCase):
 
 if __name__ == "__main__":
     # unittest.main()
-    folders = ['de07040904']
+    folders = ['de07041002']
     
     get_testlib()
     

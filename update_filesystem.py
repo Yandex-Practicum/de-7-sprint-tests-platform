@@ -5,10 +5,13 @@ import yaml
 def delete_files_or_directories(path):
     if path is None:
         return
-    if path[-1] == "/":
-        shutil.rmtree(path)
-    else:
-        os.remove(path)
+    try:
+        if path[-1] == "/":
+            shutil.rmtree(path)
+        else:
+            os.remove(path)
+    except:
+        return
 
 def refresh_files_or_directory(path):
     if path is None:
