@@ -50,12 +50,3 @@ class RegressionTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-    # folders = ['de07050205']
-    
-    # get_testlib()
-    
-    # for folder in folders:
-    #     call_testlib(folder)
-    
-    # delete_testlib()
-    
