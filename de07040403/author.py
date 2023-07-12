@@ -1,8 +1,8 @@
 from pyspark.sql import SparkSession
 
-# ВАЖНО: это путь в директорию AUTHOR
+# ВАЖНО: это путь в каталог AUTHOR
 # Замените AUTHOR на USERNAME, если будете передавать решение студенту
-AUTHOR_PATH = "/user/AUTHOR/analytics/test"
+PATH = "/home/student/tmp/user/AUTHOR/analytics/test"
 
 spark = (
     SparkSession.builder
@@ -11,15 +11,15 @@ spark = (
     .getOrCreate()
 )
 
-df = spark.read.parquet("/user/master/data/snapshots/channels/actual")
+df = spark.read.parquet("/home/student/user/master/data/snapshots/channels/actual")
 
 # напишите ваш код ниже
 (
     df.write
     .partitionBy("channel_type")
     .mode("append")
-    .parquet(AUTHOR_PATH)
+    .parquet(PATH)
 )
 
-df_final = spark.read.parquet(AUTHOR_PATH)
+df_final = spark.read.parquet(PATH)
 df_final.select("channel_type").orderBy("channel_type").distinct().show()

@@ -1,6 +1,7 @@
 # @data_tests
-# DE / Организация Data Lake / PySpark для инженера данных / Операции с DataFrame: JOIN и UNION / Задание 1
-# https://prestable.admin.praktikum.yandex-team.ru/faculties/d5b98ce5-3d91-47eb-ab9d-4df2bd9f465d/professions/48679252-cc63-48c4-a6bc-22c2d65a35e3/tracks/fe2a2f3d-d6d9-4e76-a04d-69763bb6fee2/courses/8699ef32-4cf5-40d5-ba66-d63d7fc172d9/topics/568d8213-d817-4909-aed0-9d20dc10f279/lessons/1a002fc5-b032-4bfa-ad78-c07312c20740/theory/
+# DE (Аналитик 2.0 Beta) / Организация Data Lake / PySpark для инженера данных / Операции с DataFrame: JOIN и UNION / Задание 1
+# https://prestable.admin.praktikum.yandex-team.ru/faculties/d5b98ce5-3d91-47eb-ab9d-4df2bd9f465d/professions/4fdc51de-5615-472e-b31a-3c7ece22b3f0/tracks/88492e2d-9a7c-4123-a412-9aef5e024fe5/courses/f7eb0c28-7528-4c43-b1ce-f2b98b358282/topics/a7082746-1453-4b33-a129-96b3449f8de8/lessons/4bc4223b-fc5f-4756-8581-0a863c80fc5b/theory/
+# https://www.notion.so/praktikum/6-DataFrame-JOIN-UNION-81a309fc151440c38a847dbe823248c7?pvs=4#08fa6c4469e541ba9a324e5a28f46f1e
 
 _test.var_exists("spark", same_type=True)
 

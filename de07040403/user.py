@@ -7,6 +7,6 @@ spark = (
     .getOrCreate()
 )
 
-df = spark.read.parquet("/user/master/data/snapshots/channels/actual")
+df = spark.read.parquet("/home/student/user/master/data/snapshots/channels/actual")
 
 # напишите ваш код ниже

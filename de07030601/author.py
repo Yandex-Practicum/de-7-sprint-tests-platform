@@ -7,3 +7,10 @@ spark = (
     .appName("My first session")
     .getOrCreate()
 )
+
+a = 1 # Lol kek cheburek
+# b = {
+#     'a': 1,
+    #     'b': 2,
+#     'c': 3
+#     }
