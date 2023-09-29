@@ -19,12 +19,14 @@ def call_testlib(folder, get_log=False):
         'solution.py',
         'author.py',
         'test.py',
+        'hidden_precode.py',
         folder,
         TIMEOUT_PLATFORM,
         get_log
     )
     
     os.remove(f'{folder}/solution.py')
+    os.remove(f'{folder}/hidden_precode.py')
     refresh_filesystem(folder)
     
     if not isinstance(answer, dict):
