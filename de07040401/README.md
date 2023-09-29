@@ -6,3 +6,4 @@ https://prestable.admin.praktikum.yandex-team.ru/faculties/d5b98ce5-3d91-47eb-ab
 
 # Ссылка на ноушин с формулировкой задания
 https://www.notion.so/praktikum/4-DataFrame-bffcf9bdacba49479b2339013dff1749?pvs=4#101d031673204174ac507ad41ea2de79
+

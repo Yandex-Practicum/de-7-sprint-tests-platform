@@ -1,6 +1,3 @@
-# Комментарий от тестописателя
-
-
 # Путь в админке для тестирования
 DE (Аналитик 2.0 Beta) / Организация Data Lake / PySpark для инженера данных / Встроенные стандартные функции / Задание 3
 
@@ -9,3 +6,4 @@ https://prestable.admin.praktikum.yandex-team.ru/faculties/d5b98ce5-3d91-47eb-ab
 
 # Ссылка на ноушин с формулировкой задания
 https://www.notion.so/praktikum/8-3d1daaa4bf8444d7af1e275494a1a1a8?pvs=4#4ed8a490ed024d1ba1e957a6efceda33
+

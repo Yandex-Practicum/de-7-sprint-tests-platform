@@ -1,19 +1,14 @@
 import os
+from datetime import datetime
 
-os.environ["AIRFLOW_HOME"] = "/home/student/tmp" # для запуска на кластере удалите эту строку
+from airflow import DAG
+from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
+
 os.environ["HADOOP_CONF_DIR"] = "/etc/hadoop/conf"
 os.environ["YARN_CONF_DIR"] = "/etc/hadoop/conf"
 os.environ["JAVA_HOME"] = "/usr"
 os.environ["SPARK_HOME"] = "/usr/lib/spark"
 os.environ["PYTHONPATH"] = "/usr/local/lib/python3.8"
-
-from datetime import datetime
-
-from airflow import DAG
-from airflow.providers.apache.spark.operators.spark_submit import (
-    SparkSubmitOperator,
-)
-
 
 default_args = {
     "owner": "airflow",
@@ -42,6 +37,7 @@ events_partitioned = SparkSubmitOperator(
 )
 
 # напишите ваш код ниже
+
 verified_tags_candidates_d7 = SparkSubmitOperator(
     task_id="verified_tags_candidates_d7",
     dag=dag_spark,

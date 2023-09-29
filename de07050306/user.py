@@ -1,6 +1,5 @@
 import os
 
-os.environ["AIRFLOW_HOME"] = "/home/student/tmp" # для запуска на кластере удалите эту строку
 os.environ["HADOOP_CONF_DIR"] = "/etc/hadoop/conf"
 os.environ["YARN_CONF_DIR"] = "/etc/hadoop/conf"
 os.environ["JAVA_HOME"] = "/usr"
@@ -10,9 +9,7 @@ os.environ["PYTHONPATH"] = "/usr/local/lib/python3.8"
 from datetime import datetime
 
 from airflow import DAG
-from airflow.providers.apache.spark.operators.spark_submit import (
-    SparkSubmitOperator,
-)
+from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 
 default_args = {
     "owner": "airflow",
@@ -77,14 +74,41 @@ verified_tags_candidates_d84 = SparkSubmitOperator(
 )
 
 # напишите ваш код ниже
+user_interests_d7 = SparkSubmitOperator(
+    task_id="user_interests_d7",
+    dag=dag_spark,
+    application="/lessons/user_interests.py",
+    conn_id="yarn_spark",
+    application_args=[
+        "2022-05-31",
+        "7",
+        "/user/USERNAME/data/events",
+        "/user/USERNAME/data/analytics/user_interests_d7",
+    ],
+    conf={"spark.driver.maxResultSize": "20g"},
+    executor_cores=1,
+    executor_memory="1g",
+)
 
-user_interests_d7 = ...
-
-user_interests_d28 = ...
+user_interests_d28 = SparkSubmitOperator(
+    task_id="user_interests_d28",
+    dag=dag_spark,
+    application="/lessons/user_interests.py",
+    conn_id="yarn_spark",
+    application_args=[
+        "2022-05-31",
+        "28",
+        "/user/USERNAME/data/events",
+        "/user/USERNAME/data/analytics/user_interests_d28",
+    ],
+    conf={"spark.driver.maxResultSize": "20g"},
+    executor_cores=1,
+    executor_memory="1g",
+)
 
 events_partitioned >> [
     verified_tags_candidates_d7,
     verified_tags_candidates_d84,
-    ...,
-    ...,
+    user_interests_d7,
+    user_interests_d28,
 ]

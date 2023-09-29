@@ -1,10 +1,10 @@
 from pyspark.sql import SparkSession
 
 spark = (
-    SparkSession.builder
+    SparkSession
+    .builder
     .master("local")
     .appName("Learning DataFrames")
-    .config("spark.sql.shuffle.partitions", "1")
     .getOrCreate()
 )
 # данные первого датафрейма
@@ -38,3 +38,6 @@ df_join = df.join(df_library, ["book_id"], "leftanti").select("title")
 df_cache = df_join.cache()
 # сделайте контрольную точку на df_cache
 # напишите ваш код ниже
+spark.sparkContext.setCheckpointDir("/home/student/tmp/user/USERNAME/analytics/test_check")
+df_check = df_cache.checkpoint()
+df_check.explain()

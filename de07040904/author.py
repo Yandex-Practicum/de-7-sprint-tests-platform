@@ -3,7 +3,8 @@ from pyspark.sql import SparkSession
 from pyspark.sql.window import Window
 
 spark = (
-    SparkSession.builder
+    SparkSession
+    .builder
     .master("local")
     .appName("Learning DataFrames")
     .getOrCreate()

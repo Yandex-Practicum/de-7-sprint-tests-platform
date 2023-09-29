@@ -1,6 +1,9 @@
 # напишите ваш код ниже
+import datetime
 
-
-# код ниже не меняйте
-paths = input_paths("2022-05-31", 7)
-print(paths)
+def input_paths(date, depth):
+    dt = datetime.datetime.strptime(date, "%Y-%m-%d")
+    return [
+        f"/user/USERNAME/data/events/date={(dt-datetime.timedelta(days=days)).strftime('%Y-%m-%d')}/event_type=message"
+        for days in range(depth)
+    ]

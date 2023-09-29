@@ -3,12 +3,12 @@ from pyspark.sql import SparkSession
 from pyspark.sql.window import Window
 
 spark = (
-    SparkSession.builder
+    SparkSession
+    .builder
     .master("local")
     .appName("Learning DataFrames")
     .getOrCreate()
 )
-spark.sparkContext.setLogLevel("ERROR")
 # данные  датафрейма
 data = [
     ("2021-01-06", 3744, 63, 322),
@@ -25,3 +25,6 @@ columns = ["dt", "user_id", "product_id", "purchase_amount"]
 # создаём датафрейм
 df = spark.createDataFrame(data=data, schema=columns)
 # напишите ваш код ниже
+window = Window().orderBy(df.purchase_amount)
+df_window = df.withColumn("row_number", F.row_number().over(window))
+df_window.select("dt", "user_id", "purchase_amount", "row_number").show()

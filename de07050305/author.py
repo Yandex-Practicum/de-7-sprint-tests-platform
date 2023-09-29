@@ -1,5 +1,5 @@
-# ВАЖНО: это код для запуска скрипта, в авторском его выполнять не нужно
-# Раскомментируйте, если будете передавать решение студенту
+# # ВАЖНО: это код для запуска скрипта, в авторском его выполнять не нужно
+# # Раскомментируйте, если будете передавать решение студенту
 
 # import datetime
 # import sys
@@ -10,38 +10,42 @@
 
 
 # def main():
-#     date = sys.argv[1]
-#     days_count = sys.argv[2]
-#     events_base_path = sys.argv[3]
-#     output_base_path = sys.argv[4]
+#     date = sys.argv[1] # '2022-05-25'
+#     days_count = sys.argv[2] # '7'
+#     events_base_path = sys.argv[3] # '/home/student/tmp/user/USERNAME/data/events'
+#     output_base_path = sys.argv[4] # '/home/student/tmp/user/USERNAME/analytics/user_interests_d7'
 
 #     spark = (
-#         SparkSession.builder
-#         .master("local")
+#         SparkSession
+#         .builder
+#         .master("yarn")
 #         .appName(f"UserInterestsJob-{date}-d{days_count}")
 #         .getOrCreate()
 #     )
 
 #     # напишите ваш код ниже
 #     posts_part = (
-#         spark.read.option("basePath", events_base_path)
+#         spark.read
+#         .option("basePath", events_base_path)
 #         .parquet(*input_event_paths(events_base_path, date, days_count))
 #         .where("event.message_channel_to is not null and event_type = 'message'")
 #     )
 
-#     posts_all = spark.read.parquet(events_base_path).where(
-#         "event_type='message' and event.message_channel_to is not null"
+#     posts_all = (
+#         spark.read
+#         .parquet(events_base_path)
+#         .where("event_type='message' and event.message_channel_to is not null")
 #     )
 
 #     reactions_part = (
-#         spark.read.option("basePath", events_base_path)
+#         spark.read
+#         .option("basePath", events_base_path)
 #         .parquet(*input_event_paths(events_base_path, date, days_count))
 #         .where("event_type = 'reaction'")
 #     )
 
 #     result = calculate_user_interests(posts_part, posts_all, reactions_part)
 #     result.write.mode("overwrite").parquet(f"{output_base_path}/date={date}")
-
 
 # def input_event_paths(base_path, date, depth):
 #     dt = datetime.datetime.strptime(date, "%Y-%m-%d")
@@ -59,8 +63,7 @@
 
 # def tag_tops(posts):
 #     result = (
-#         posts
-#         .select(
+#         posts.select(
 #             F.col("event.message_id").alias("message_id"),
 #             F.col("event.message_from").alias("user_id"),
 #             F.explode(F.col("event.tags")).alias("tag"),

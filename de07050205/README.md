@@ -1,16 +1,3 @@
-# Комментарий от тестописателя
-Импорт `airflow` в тренажёре приведёт к ошибке доступа в каталог `/home/student/airflow`: 
-
-`PermissionError: [Errno 13] Permission denied: '/home/student/airflow'`
-
-Причина в том, что `airflow` пытается создать этот каталог, чтобы хранить в нём файлы конфигов и логов `airflow.cfg`, `webserver_config.py` и `logs`.
-
-Но в контейнере для записи открыт только каталог `/home/student/tmp`.
-
-Исправить можно через обновление переменной окружения `AIRFLOW_HOME` до импорта `airflow` — добавил их в прекод и авторское.
-
-**Note:** в задачах с Airflow лучше отключать ворнинги чтобы избежать лишних вопросов от студентов. В JSON-конфиге контейнера это можно сделать через параметр `"precode"` — `"\nimport warnings\nwarnings.filterwarnings('ignore')\n"`
-
 # Путь в админке для тестирования
 DE (Аналитик 2.0 Beta) / Организация Data Lake / Подготовка данных и наполнение Data Lake / Задача 1: обновление справочника тегов / Задание 5
 
@@ -19,3 +6,4 @@ https://prestable.admin.praktikum.yandex-team.ru/faculties/d5b98ce5-3d91-47eb-ab
 
 # Ссылка на ноушин с формулировкой задания
 https://www.notion.so/praktikum/2-1-bc2eae94adfd4c61a17c953b1f288f5e?pvs=4#19f78088a06b419d88182c069fad14fa
+

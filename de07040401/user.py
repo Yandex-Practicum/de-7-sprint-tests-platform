@@ -1,10 +1,21 @@
 from pyspark.sql import SparkSession
 
 spark = (
-    SparkSession.builder
+    SparkSession
+    .builder
     .master("local")
     .appName("Learning DataFrames")
     .getOrCreate()
 )
 
 # напишите ваш код ниже
+data = [
+    ("Max", 55),
+    ("Yan", 53),
+    ("Dmitry", 54),
+    ("Ann", 25),
+]
+columns = ["Name", "Age"]
+
+df = spark.createDataFrame(data=data, schema=columns)
+df.printSchema()

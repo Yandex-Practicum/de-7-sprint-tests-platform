@@ -1,55 +1,45 @@
 # @data_tests
-# DE (Аналитик 2.0 Beta) / Организация Data Lake / PySpark для инженера данных / Создание DataFrame и базовые операции / Задание 3
-# https://prestable.admin.praktikum.yandex-team.ru/faculties/d5b98ce5-3d91-47eb-ab9d-4df2bd9f465d/professions/4fdc51de-5615-472e-b31a-3c7ece22b3f0/tracks/88492e2d-9a7c-4123-a412-9aef5e024fe5/courses/f7eb0c28-7528-4c43-b1ce-f2b98b358282/topics/a7082746-1453-4b33-a129-96b3449f8de8/lessons/e86a4e6c-0f3f-431a-8fa5-6d539a6a9825/theory/
+# DE / Организация Data Lake / PySpark для инженера данных / Создание DataFrame и базовые операции / Задание 3
+# https://prestable.admin.praktikum.yandex-team.ru/faculties/d5b98ce5-3d91-47eb-ab9d-4df2bd9f465d/professions/48679252-cc63-48c4-a6bc-22c2d65a35e3/tracks/fe2a2f3d-d6d9-4e76-a04d-69763bb6fee2/courses/8699ef32-4cf5-40d5-ba66-d63d7fc172d9/topics/cd2511e9-f42c-4428-837d-4c7b0436062b/lessons/1561b525-4ce9-44d0-809e-4792847e1572/theory/
 # https://www.notion.so/praktikum/4-DataFrame-bffcf9bdacba49479b2339013dff1749?pvs=4#57e09de023374816bdb4ab0e05226ae9
 
-LOAD_PATH = "/home/student/user/master/data/snapshots/channels/actual"
-SAVE_PATH = "/home/student/tmp/user/USERNAME/analytics/test"
+from pyspark.sql.session import SparkSession as _SparkSession
+from pyspark.sql.dataframe import DataFrame as _DataFrame
 
-_test.var_exists("spark", same_type=True)
+_test.var_exists('spark', 'df', precode=True)
 
-_test.once(
-    [
-        dict(name="parquet", in_args=[LOAD_PATH]),
-        dict(
-            name="load",
-            in_kwargs=dict(
-                path=LOAD_PATH,
-                format="parquet",
-            ),
-        ),
-    ],
-    m="Не меняйте прекод.",
+assert isinstance(_u.spark, _SparkSession), (
+    'Неверный тип переменной `spark`.\n'
+    'Пожалуйста, не изменяйте прекод. Это важно для проверки.'
+)
+assert isinstance(_u.df, _DataFrame), (
+    'Неверный тип переменной `df`.\n'
+    'Пожалуйста, не изменяйте прекод. Это важно для проверки.'
 )
 
-_test.call("partitionBy", in_args=["channel_type"])
-_test.call("mode", in_args=["append"])
+msg ='Запись и чтение данных реализуйте методом `.parquet()`.'
 
-_test.once(
-    [
-        dict(name="parquet", in_args=[SAVE_PATH]),
-        dict(name="save", in_args=[SAVE_PATH]),
-    ],
-    m=f"Cохраните новый датафрейм c актуальной информацией о каналах в диркеторию `{SAVE_PATH}`.",
+_test.once('parquet', m=msg)
+_test.once('parquet', m=msg)
+
+_test.call('partitionBy', in_args=['channel_type'])
+_test.call('mode', in_args=['append'])
+
+_test.call('select', in_args=['channel_type'])
+_test.call('orderBy', in_args=['channel_type'])
+_test.call('distinct')
+_test.call('show', args=[], kwargs=dict())
+
+_a_output = \
+'''+------------+
+|channel_type|
++------------+
+|       river|
+|     channel|
++------------+'''
+
+_test.cmp(
+    _u._output,
+    _a_output,
+    m='Неверный вывод. Проверьте выводимые значения.',
 )
-
-_test.once(
-    [
-        dict(name="parquet", in_args=[SAVE_PATH]),
-        dict(
-            name="load",
-            in_kwargs=dict(
-                path=SAVE_PATH,
-                format="parquet",
-            ),
-        ),
-    ],
-    m=f"Прочтите файл из директории `{SAVE_PATH}`.",
-)
-
-_test.call("select", in_args=["channel_type"])
-_test.call("orderBy", in_args=["channel_type"])
-_test.call("distinct")
-_test.call("show")
-
-_test.output()
