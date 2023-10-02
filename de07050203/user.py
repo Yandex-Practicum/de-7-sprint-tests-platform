@@ -13,7 +13,8 @@ def input_paths(date, depth):
     ]
 
 
-paths = input_paths("2022-05-31", 84) # напишите ваш код здесь
+# напишите ваш код здесь
+paths = input_paths(..., ...)
 
 messages = spark.read.parquet(*paths)
 

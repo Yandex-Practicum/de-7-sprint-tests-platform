@@ -1,6 +1,4 @@
-import pyspark.sql.functions as F
 from pyspark.sql import SparkSession
-from pyspark.sql.window import Window
 
 spark = (
     SparkSession
@@ -25,12 +23,3 @@ columns = ["dt", "user_id", "product_id", "purchase_amount"]
 
 df = spark.createDataFrame(data=data, schema=columns)
 # напишите ваш код ниже
-window = Window().partitionBy("user_id")
-
-df_window_agg = (
-    df
-    .withColumn("max", F.max("purchase_amount").over(window))
-    .withColumn("min", F.min("purchase_amount").over(window))
-)
-
-df_window_agg.select("user_id", "max", "min").distinct().show()

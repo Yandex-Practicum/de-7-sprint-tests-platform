@@ -7,6 +7,7 @@ spark = (
     .appName("Learning DataFrames")
     .getOrCreate()
 )
+
 # данные первого датафрейма
 book = [
     ("Harry Potter and the Goblet of Fire", "J. K. Rowling", 322),
@@ -36,6 +37,3 @@ df_library = spark.createDataFrame(data=library, schema=columns_library)
 # делаем join
 df_join = df.join(df_library, ["book_id"], "leftanti").select("title")
 # напишите ваш код ниже
-df_cache = df_join.cache()
-df_cache.show()
-df_cache.explain()

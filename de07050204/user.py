@@ -1,17 +1,15 @@
 import sys
 
 from pyspark.sql import SparkSession
-import pyspark.sql.functions as F
-import datetime
 
 
 def main():
-    date = sys.argv[1]
-    days_count = sys.argv[2]
-    suggested_cutoff = sys.argv[3]
-    base_input_path = sys.argv[4]
-    verified_tags_path = sys.argv[5]
-    base_output_path = sys.argv[6]
+    date = sys.argv[1] # '2022-05-31'
+    days_count = sys.argv[2] # '5'
+    suggested_cutoff = sys.argv[3] # '300'
+    base_input_path = sys.argv[4] # '/home/student/tmp/user/USERNAME/data/events'
+    verified_tags_path = sys.argv[5] # '/home/student/tmp/user/master/data/snapshots/tags_verified/actual'
+    base_output_path = sys.argv[6] # '/home/student/tmp/user/USERNAME/data/analytics/verified_tags_candidates'
 
     spark = (
         SparkSession
@@ -22,31 +20,10 @@ def main():
     )
 
     # напишите ваш код ниже
-
-    dt = datetime.datetime.strptime(date, "%Y-%m-%d")
-    paths = [
-        f"{base_input_path}/date={(dt-datetime.timedelta(days=x)).strftime('%Y-%m-%d')}/event_type=message"
-        for x in range(int(days_count))
-    ]
-    messages = spark.read.parquet(*paths)
-
-    verified_tags = spark.read.parquet(verified_tags_path)
-
-    candidates = find_candidates(messages, verified_tags, suggested_cutoff)
-    candidates.write.parquet(f"{base_output_path}/date={date}")
-
-def find_candidates(messages, verified_tags, suggested_cutoff):
-    all_tags = (
-        messages
-        .where("event.message_channel_to is not null")
-        .selectExpr(["event.message_from as user", "explode(event.tags) as tag"])
-        .groupBy("tag")
-        .agg(F.countDistinct("user").alias("suggested_count"))
-        .where(F.col("suggested_count") >= suggested_cutoff)
-    )
-
-    return all_tags.join(verified_tags, "tag", "left_anti")
-
+    ...
+    
+    # напишите директорию записи в общем виде
+    candidates.write...
 
 if __name__ == "__main__":
     main()

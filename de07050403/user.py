@@ -9,6 +9,7 @@ os.environ["PYTHONPATH"] = "/usr/local/lib/python3.8"
 from datetime import datetime
 
 from airflow import DAG
+from airflow.models.baseoperator import chain
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 
 default_args = {
@@ -106,27 +107,11 @@ user_interests_d28 = SparkSubmitOperator(
 )
 
 # напишите ваш код ниже
-connection_interests_d7 = SparkSubmitOperator(
-    task_id="connection_interests_d7",
-    dag=dag_spark,
-    application="/lessons/connection_interests.py",
-    conn_id="yarn_spark",
-    application_args=[
-        "2022-05-31",
-        "7",
-        "/user/USERNAME/data/events",
-        "/user/USERNAME/data/analytics/user_interests_d7",
-        "/user/master/data/snapshots/tags_verified/actual",
-        "/user/USERNAME/data/analytics/connection_interests_d7",
-    ],
-    conf={"spark.driver.maxResultSize": "20g"},
-    executor_cores=1,
-    executor_memory="1g",
-)
+connection_interests_d7 = ...
 
 events_partitioned >> [
     verified_tags_candidates_d7,
     verified_tags_candidates_d84,
 ]
-events_partitioned >> user_interests_d7 >> connection_interests_d7
+events_partitioned >> user_interests_d7 >> ...
 events_partitioned >> user_interests_d28

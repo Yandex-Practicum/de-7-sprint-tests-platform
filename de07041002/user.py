@@ -1,6 +1,3 @@
-# ВАЖНО: для проверки авторское выполнять не нужно
-# Раскомментируйте если будете передавать решение студенту
-
 import sys
 
 from pyspark.sql import SparkSession
@@ -19,16 +16,11 @@ def main():
         .getOrCreate()
     )
 
-    # Напишите директорию чтения в общем виде
-    events = spark.read.json(f"{base_input_path}/date={date}")
+    # напишите директорию чтения в общем виде
+    events = spark.read....
 
-    # Напишите директорию записи в общем виде
-    (
-        events.write
-        .partitionBy("event_type")
-        .mode("overwrite")
-        .parquet(f"{base_output_path}/date={date}")
-    )
+    # напишите директорию записи в общем виде
+    events.write....
 
 
 if __name__ == "__main__":
