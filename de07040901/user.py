@@ -1,14 +1,12 @@
-import pyspark.sql.functions as F
 from pyspark.sql import SparkSession
-from pyspark.sql.window import Window
 
 spark = (
-    SparkSession.builder
+    SparkSession
+    .builder
     .master("local")
     .appName("Learning DataFrames")
     .getOrCreate()
 )
-spark.sparkContext.setLogLevel("ERROR")
 # данные  датафрейма
 data = [
     ("2021-01-06", 3744, 63, 322),

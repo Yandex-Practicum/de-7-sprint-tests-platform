@@ -1,11 +1,3 @@
-# Ссылка на урок в Notion
-https://www.notion.so/praktikum/6-DataFrame-JOIN-UNION-81a309fc151440c38a847dbe823248c7?pvs=4#cc589e5e559641d5a8f1c3821dcae391
-
-# Комментарий от тестописателя
-В отличие от Jupyter, чтобы вывести значение на экран на платформе, нужно использовать функцию `print()` — нужно добавить это в условие задачи.
-
-Это касается только тех задач, где есть `.count()` — если в задаче есть `.show()`, то дублировать вывод через `print()` не нужно
-
 # Путь в админке для тестирования
 DE (Аналитик 2.0 Beta) / Организация Data Lake / PySpark для инженера данных / Операции с DataFrame: JOIN и UNION / Задание 2
 
@@ -14,3 +6,4 @@ https://prestable.admin.praktikum.yandex-team.ru/faculties/d5b98ce5-3d91-47eb-ab
 
 # Ссылка на ноушин с формулировкой задания
 https://www.notion.so/praktikum/6-DataFrame-JOIN-UNION-81a309fc151440c38a847dbe823248c7?pvs=4#cc589e5e559641d5a8f1c3821dcae391
+

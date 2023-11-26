@@ -15,12 +15,13 @@ def get_testlib():
     zf.extractall('.')
 
 
-def get_testlib_answer(user_py, author_py, test_py, folder, timeout=60, get_log=False):
+def get_testlib_answer(user_py, author_py, test_py, precode_py, folder, timeout=60, get_log=False):
     cmd = [
         'python3', '__main__.py',
         '-u', f'{folder}/{user_py}',
         '-a', f'{folder}/{author_py}',
         '-t', f'{folder}/{test_py}',
+        '-pre', f'{folder}/{precode_py}',
         '--keep', '--no-slack',
         ]
     if get_log:

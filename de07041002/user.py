@@ -4,13 +4,14 @@ from pyspark.sql import SparkSession
 
 
 def main():
-    date = sys.argv[1]
-    base_input_path = sys.argv[2]
-    base_output_path = sys.argv[3]
+    date = sys.argv[1] # '2022-05-31'
+    base_input_path = sys.argv[2] # '/home/student/tmp/user/master/data/events'
+    base_output_path = sys.argv[3] # '/home/student/tmp/user/USERNAME/data/events'
 
     spark = (
-        SparkSession.builder
-        .master("local") # для запуска на кластере укажите "yarn"
+        SparkSession
+        .builder
+        .master("yarn")
         .appName(f"EventsPartitioningJob-{date}")
         .getOrCreate()
     )

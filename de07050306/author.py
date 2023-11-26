@@ -1,18 +1,14 @@
 import os
+from datetime import datetime
 
-os.environ["AIRFLOW_HOME"] = "/home/student/tmp" # для запуска на кластере удалите эту строку
+from airflow import DAG
+from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
+
 os.environ["HADOOP_CONF_DIR"] = "/etc/hadoop/conf"
 os.environ["YARN_CONF_DIR"] = "/etc/hadoop/conf"
 os.environ["JAVA_HOME"] = "/usr"
 os.environ["SPARK_HOME"] = "/usr/lib/spark"
 os.environ["PYTHONPATH"] = "/usr/local/lib/python3.8"
-
-from datetime import datetime
-
-from airflow import DAG
-from airflow.providers.apache.spark.operators.spark_submit import (
-    SparkSubmitOperator,
-)
 
 default_args = {
     "owner": "airflow",
@@ -28,12 +24,12 @@ dag_spark = DAG(
 events_partitioned = SparkSubmitOperator(
     task_id="events_partitioned",
     dag=dag_spark,
-    application="/lessons/partition.py",
+    application="/home/username/partition_overwrite.py",
     conn_id="yarn_spark",
     application_args=[
         "2022-05-31",
         "/user/master/data/events",
-        "/user/USERNAME/data/events",
+        "/user/username/data/events",
     ],
     conf={"spark.driver.maxResultSize": "20g"},
     executor_cores=1,
@@ -43,15 +39,15 @@ events_partitioned = SparkSubmitOperator(
 verified_tags_candidates_d7 = SparkSubmitOperator(
     task_id="verified_tags_candidates_d7",
     dag=dag_spark,
-    application="/lessons/verified_tags_candidates.py",
+    application="/home/username/verified_tags_candidates.py",
     conn_id="yarn_spark",
     application_args=[
         "2022-05-31",
         "7",
         "100",
-        "/user/USERNAME/data/events",
+        "/user/username/data/events",
         "/user/master/data/snapshots/tags_verified/actual",
-        "/user/USERNAME/data/analytics/verified_tags_candidates_d7",
+        "/user/username/data/analytics/verified_tags_candidates_d7",
     ],
     conf={"spark.driver.maxResultSize": "20g"},
     executor_cores=1,
@@ -61,15 +57,15 @@ verified_tags_candidates_d7 = SparkSubmitOperator(
 verified_tags_candidates_d84 = SparkSubmitOperator(
     task_id="verified_tags_candidates_d84",
     dag=dag_spark,
-    application="/lessons/verified_tags_candidates.py",
+    application="/home/username/verified_tags_candidates.py",
     conn_id="yarn_spark",
     application_args=[
         "2022-05-31",
         "84",
         "1000",
-        "/user/USERNAME/data/events",
+        "/user/username/data/events",
         "/user/master/data/snapshots/tags_verified/actual",
-        "/user/USERNAME/data/analytics/verified_tags_candidates_d84",
+        "/user/username/data/analytics/verified_tags_candidates_d84",
     ],
     conf={"spark.driver.maxResultSize": "20g"},
     executor_cores=1,
@@ -80,13 +76,13 @@ verified_tags_candidates_d84 = SparkSubmitOperator(
 user_interests_d7 = SparkSubmitOperator(
     task_id="user_interests_d7",
     dag=dag_spark,
-    application="/lessons/user_interests.py",
+    application="/home/username/user_interests.py",
     conn_id="yarn_spark",
     application_args=[
         "2022-05-31",
         "7",
-        "/user/USERNAME/data/events",
-        "/user/USERNAME/data/analytics/user_interests_d7",
+        "/user/username/data/events",
+        "/user/username/data/analytics/user_interests_d7",
     ],
     conf={"spark.driver.maxResultSize": "20g"},
     executor_cores=1,
@@ -96,13 +92,13 @@ user_interests_d7 = SparkSubmitOperator(
 user_interests_d28 = SparkSubmitOperator(
     task_id="user_interests_d28",
     dag=dag_spark,
-    application="/lessons/user_interests.py",
+    application="/home/username/user_interests.py",
     conn_id="yarn_spark",
     application_args=[
         "2022-05-31",
         "28",
-        "/user/USERNAME/data/events",
-        "/user/USERNAME/data/analytics/user_interests_d28",
+        "/user/username/data/events",
+        "/user/username/data/analytics/user_interests_d28",
     ],
     conf={"spark.driver.maxResultSize": "20g"},
     executor_cores=1,

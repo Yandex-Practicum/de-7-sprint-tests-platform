@@ -1,25 +1,25 @@
-from pyspark.sql import SparkSession
+# # ВАЖНО: для проверки авторское выполнять не нужно
+# # Раскомментируйте если будете передавать решение студенту
 
-# ВАЖНО: это путь в каталог AUTHOR
-# Замените AUTHOR на USERNAME, если будете передавать решение студенту
-PATH = "/home/student/tmp/user/AUTHOR/analytics/test"
+# from pyspark.sql import SparkSession
 
-spark = (
-    SparkSession.builder
-    .master("local")
-    .appName("Learning DataFrames")
-    .getOrCreate()
-)
+# spark = (
+#     SparkSession
+#     .builder
+#     .master("yarn")
+#     .appName("Learning DataFrames")
+#     .getOrCreate()
+# )
 
-df = spark.read.parquet("/home/student/user/master/data/snapshots/channels/actual")
+# df = spark.read.parquet("/home/student/tmp/user/master/data/snapshots/channels/actual")
 
-# напишите ваш код ниже
-(
-    df.write
-    .partitionBy("channel_type")
-    .mode("append")
-    .parquet(PATH)
-)
+# # напишите ваш код ниже
+# (
+#     df.write
+#     .partitionBy("channel_type")
+#     .mode("append")
+#     .parquet("/home/student/tmp/user/USERNAME/analytics/test")
+# )
 
-df_final = spark.read.parquet(PATH)
-df_final.select("channel_type").orderBy("channel_type").distinct().show()
+# df_final = spark.read.parquet("/home/student/tmp/user/USERNAME/analytics/test")
+# df_final.select("channel_type").orderBy("channel_type").distinct().show()

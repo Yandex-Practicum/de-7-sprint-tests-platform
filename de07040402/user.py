@@ -1,8 +1,9 @@
 from pyspark.sql import SparkSession
 
 spark = (
-    SparkSession.builder
-    .master("local")
+    SparkSession
+    .builder
+    .master("yarn")
     .appName("Learning DataFrames")
     .getOrCreate()
 )

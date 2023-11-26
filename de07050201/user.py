@@ -1,6 +1,9 @@
 # напишите ваш код ниже
+...
 
-
-# код ниже не меняйте
-paths = input_paths("2022-05-31", 7)
-print(paths)
+def input_paths(date, depth):
+    dt = ...
+    return [
+        f"/user/USERNAME/data/events/date={...}/event_type=message"
+        for ... in range(...)
+    ]

@@ -1,10 +1,10 @@
 from pyspark.sql import SparkSession
 
 spark = (
-    SparkSession.builder
+    SparkSession
+    .builder
     .master("local")
     .appName("Learning DataFrames")
-    .config("spark.sql.shuffle.partitions", "1")
     .getOrCreate()
 )
 # данные первого датафрейма

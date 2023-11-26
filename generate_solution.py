@@ -27,3 +27,7 @@ def generate_solution_code(folder):
     with open(f'{folder}/solution.py','w') as f:
         f.write(solution_code)
 
+    with open(f'{folder}/precode.py', "r+", encoding='utf-8') as f:
+        precode_code = f.read()
+    with open(f'{folder}/hidden_precode.py','w') as f:
+        f.write(precode_code)

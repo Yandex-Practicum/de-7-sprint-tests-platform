@@ -1,12 +1,3 @@
-# Комментарий от тестописателя
-### НЕ РАБОТАЕТ НА ПЛАТФОРМЕ
-
----
-
-**Выполнить:** ERROR `Request took too long to execute; timeout occured`
-
-**Проверить:** ERROR `Request took too long to execute; timeout occured`
-
 # Путь в админке для тестирования
 DE (Аналитик 2.0 Beta) / Организация Data Lake / Подготовка данных и наполнение Data Lake / Задача 2: портрет пользователя / Задание 5
 
@@ -15,3 +6,4 @@ https://prestable.admin.praktikum.yandex-team.ru/faculties/d5b98ce5-3d91-47eb-ab
 
 # Ссылка на ноушин с формулировкой задания
 https://www.notion.so/praktikum/3-2-38943ff76b604ef18826add9cf1c7c0a?pvs=4#ce9d1dff0b614b6194297746ee4ff4d8
+
